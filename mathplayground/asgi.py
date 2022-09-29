@@ -19,14 +19,14 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mathplayground.settings')
 # is populated before importing code that may import ORM models.
 django_asgi_app = get_asgi_application()
 
-import polls.routing
+from mathplayground.polls import routing
 
 application = ProtocolTypeRouter({
     'http': django_asgi_app,
     'websocket': AllowedHostsOriginValidator(
         AuthMiddlewareStack(
             URLRouter(
-                polls.routing.websocket_urlpatterns
+                routing.websocket_urlpatterns
             )
         )
     ),
