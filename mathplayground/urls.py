@@ -19,6 +19,6 @@ from mathplayground.main import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('polls/', include('polls.urls')),
+    path('polls/', include('mathplayground.polls.urls')),
     path('admin/', admin.site.urls),
 ]

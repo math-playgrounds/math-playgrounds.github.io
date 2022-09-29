@@ -66,11 +66,11 @@ class PollTests(ChannelsLiveServerTestCase):
 
     # === Utility ===
 
-    def _enter_chat_room(self, room_name):
+    def _enter_chat_room(self, poll_id):
         self.driver.get(self.live_server_url + '/polls/')
-        ActionChains(self.driver).send_keys(room_name + '\n').perform()
+        ActionChains(self.driver).send_keys(poll_id + '\n').perform()
         WebDriverWait(self.driver, 2).until(lambda _:
-            room_name in self.driver.current_url)
+            poll_id in self.driver.current_url)
 
     def _open_new_window(self):
         self.driver.execute_script('window.open("about:blank", "_blank");')

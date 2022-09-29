@@ -3,8 +3,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class PollsConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        self.poll_id = self.scope['url_route']['kwargs']['poll_id']
+        self.room_group_name = 'poll_%s' % self.poll_id
 
         # Join room group
         await self.channel_layer.group_add(

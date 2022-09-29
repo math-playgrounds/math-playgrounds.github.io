@@ -36,7 +36,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'channels',
-    'polls',
     'mathplayground',
     'django.contrib.admin',
     'django.contrib.auth',
