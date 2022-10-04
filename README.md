@@ -11,3 +11,8 @@ python3 -m venv ve
 ./manage.py migrate
 ./manage.py runserver
 ```
+
+Populate the `media/mathplayground` directory for front-end code.
+```
+cp -r ~/public_html/mathplayground/public/* ./media/mathplayground/
+```
