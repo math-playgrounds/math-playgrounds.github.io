@@ -2,7 +2,7 @@
 Django Channels server for mathplayground
 
 ## Start-up steps:
-Install [https://redis.io/ Redis] and start the redis service.
+Install [Redis](https://redis.io/) and start the redis service.
 
 Start django server:
 ```
