@@ -7,13 +7,11 @@ Install [Redis](https://redis.io/) and start the redis service.
 
 Start django server:
 ```
-python3 -m venv ve
-./ve/bin/pip install -r requirements.txt
-./manage.py migrate
-./manage.py runserver
+make runserver
 ```
 
-Populate the `media/mathplayground` directory for front-end code.
+In order to connect to your development version of the mathplayground front-end code, you'll
+need to symlink in the JS bundle:
 ```
-cp -r ~/public_html/mathplayground/public/* ./media/mathplayground/
+./scripts/link.sh
 ```
