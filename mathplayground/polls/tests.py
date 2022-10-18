@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 
 class PollTests(ChannelsLiveServerTestCase):
@@ -11,9 +12,12 @@ class PollTests(ChannelsLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        options = Options()
+        options.add_argument('--headless')
+
         try:
             # NOTE: Requires "chromedriver" binary to be installed in $PATH
-            cls.driver = webdriver.Chrome()
+            cls.driver = webdriver.Chrome(options=options)
         except:  # noqa
             super().tearDownClass()
             raise
