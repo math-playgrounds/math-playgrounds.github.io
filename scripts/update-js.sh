@@ -6,4 +6,6 @@
 DEST_DIR="media/mathplayground/"
 ORIG_DIR="$HOME/public_html/mathplayground/public/"
 
-cp -r $ORIG_DIR/* $DEST_DIR/
+rm -rf $DEST_DIR
+mkdir $DEST_DIR
+cp -r $ORIG_DIR/* $DEST_DIR
