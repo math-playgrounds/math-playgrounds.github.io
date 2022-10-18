@@ -4,6 +4,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class PollTests(ChannelsLiveServerTestCase):
@@ -16,8 +18,10 @@ class PollTests(ChannelsLiveServerTestCase):
         options.add_argument('--headless')
 
         try:
-            # NOTE: Requires "chromedriver" binary to be installed in $PATH
-            cls.driver = webdriver.Chrome(options=options)
+            cls.driver = webdriver.Chrome(
+                service=ChromeService(
+                    ChromeDriverManager().install()),
+                options=options)
         except:  # noqa
             super().tearDownClass()
             raise
