@@ -19,7 +19,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mathplayground.settings')
 # is populated before importing code that may import ORM models.
 django_asgi_app = get_asgi_application()
 
-from mathplayground.polls import routing
+from mathplayground.polls import routing  # noqa
 
 application = ProtocolTypeRouter({
     'http': django_asgi_app,

@@ -1,6 +1,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 
+
 class PollsConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.poll_id = self.scope['url_route']['kwargs']['poll_id']

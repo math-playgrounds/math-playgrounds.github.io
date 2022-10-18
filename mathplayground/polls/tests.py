@@ -4,6 +4,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
+
 class PollTests(ChannelsLiveServerTestCase):
     serve_static = True  # emulate StaticLiveServerTestCase
 
@@ -13,7 +14,7 @@ class PollTests(ChannelsLiveServerTestCase):
         try:
             # NOTE: Requires "chromedriver" binary to be installed in $PATH
             cls.driver = webdriver.Chrome()
-        except:
+        except:  # noqa
             super().tearDownClass()
             raise
 
@@ -22,7 +23,10 @@ class PollTests(ChannelsLiveServerTestCase):
         cls.driver.quit()
         super().tearDownClass()
 
-    def test_when_chat_message_posted_then_seen_by_everyone_in_same_room(self):
+    def test_chat_1(self):
+        """
+        test_when_chat_message_posted_then_seen_by_everyone_in_same_room
+        """
         try:
             self._enter_chat_room('room_1')
 
@@ -31,17 +35,22 @@ class PollTests(ChannelsLiveServerTestCase):
 
             self._switch_to_window(0)
             self._post_message('hello')
-            WebDriverWait(self.driver, 2).until(lambda _:
+            WebDriverWait(self.driver, 2).until(
+                lambda _:
                 'hello' in self._chat_log_value,
                 'Message was not received by window 1 from window 1')
             self._switch_to_window(1)
-            WebDriverWait(self.driver, 2).until(lambda _:
+            WebDriverWait(self.driver, 2).until(
+                lambda _:
                 'hello' in self._chat_log_value,
                 'Message was not received by window 2 from window 1')
         finally:
             self._close_all_new_windows()
 
-    def test_when_chat_message_posted_then_not_seen_by_anyone_in_different_room(self):
+    def test_chat_2(self):
+        """
+        test_when_chat_message_posted_then_not_seen_by_anyone_in_different_room
+        """
         try:
             self._enter_chat_room('room_1')
 
@@ -50,16 +59,19 @@ class PollTests(ChannelsLiveServerTestCase):
 
             self._switch_to_window(0)
             self._post_message('hello')
-            WebDriverWait(self.driver, 2).until(lambda _:
+            WebDriverWait(self.driver, 2).until(
+                lambda _:
                 'hello' in self._chat_log_value,
                 'Message was not received by window 1 from window 1')
 
             self._switch_to_window(1)
             self._post_message('world')
-            WebDriverWait(self.driver, 2).until(lambda _:
+            WebDriverWait(self.driver, 2).until(
+                lambda _:
                 'world' in self._chat_log_value,
                 'Message was not received by window 2 from window 2')
-            self.assertTrue('hello' not in self._chat_log_value,
+            self.assertTrue(
+                'hello' not in self._chat_log_value,
                 'Message was improperly received by window 2 from window 1')
         finally:
             self._close_all_new_windows()
@@ -69,7 +81,8 @@ class PollTests(ChannelsLiveServerTestCase):
     def _enter_chat_room(self, poll_id):
         self.driver.get(self.live_server_url + '/polls/')
         ActionChains(self.driver).send_keys(poll_id + '\n').perform()
-        WebDriverWait(self.driver, 2).until(lambda _:
+        WebDriverWait(self.driver, 2).until(
+            lambda _:
             poll_id in self.driver.current_url)
 
     def _open_new_window(self):
@@ -91,4 +104,5 @@ class PollTests(ChannelsLiveServerTestCase):
 
     @property
     def _chat_log_value(self):
-        return self.driver.find_element(by=By.CSS_SELECTOR, value="#chat-log").get_property('value')
+        return self.driver.find_element(
+            by=By.CSS_SELECTOR, value="#chat-log").get_property('value')
