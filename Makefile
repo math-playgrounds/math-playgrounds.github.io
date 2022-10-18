@@ -1,0 +1,3 @@
+APP=mathplayground
+
+include *.mk
