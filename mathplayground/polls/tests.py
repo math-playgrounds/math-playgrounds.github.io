@@ -15,7 +15,13 @@ class PollTests(ChannelsLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         options = Options()
+
+        options.add_argument('--no-sandbox')
         options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--profile-directory=Default')
+        options.add_argument('--user-data-dir=~/.config/google-chrome')
 
         try:
             cls.driver = webdriver.Chrome(
