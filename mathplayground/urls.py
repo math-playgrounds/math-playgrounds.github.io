@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('polls/', include('mathplayground.polls.urls')),
     path('admin/', admin.site.urls),
+    path('smoketest/', include('smoketest.urls')),
 ]
