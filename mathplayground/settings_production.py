@@ -18,6 +18,7 @@ S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = ('https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME)
 
 MEDIA_URL = S3_URL + 'uploads/'
+AWS_LOCATION = 'media/'
 AWS_QUERYSTRING_AUTH = False
 
 LOGGING = {
