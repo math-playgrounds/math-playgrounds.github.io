@@ -11,16 +11,11 @@ AWS_S3_OBJECT_PARAMETERS = {
     'ACL': 'public-read',
 }
 AWS_PRELOAD_METADATA = True
-STATICFILES_STORAGE = 'cacheds3storage.CompressorS3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = ('https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME)
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
-COMPRESS_ROOT = STATIC_ROOT  # noqa: F405
-COMPRESS_URL = STATIC_URL
-DEFAULT_FILE_STORAGE = 'cacheds3storage.MediaRootS3BotoStorage'
-COMPRESS_STORAGE = 'cacheds3storage.CompressorS3BotoStorage'
+
 MEDIA_URL = S3_URL + 'uploads/'
 AWS_QUERYSTRING_AUTH = False
 
