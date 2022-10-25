@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
 
 
 class PollTests(ChannelsLiveServerTestCase):
@@ -24,9 +25,15 @@ class PollTests(ChannelsLiveServerTestCase):
         options.add_argument('--user-data-dir=~/.config/google-chrome')
 
         try:
+            cdm = ChromeDriverManager(
+                chrome_type=ChromeType.CHROMIUM).install()
+        except ValueError:
+            # Fall back to Chrome
+            cdm = ChromeDriverManager().install()
+
+        try:
             cls.driver = webdriver.Chrome(
-                service=ChromeService(
-                    ChromeDriverManager().install()),
+                service=ChromeService(cdm),
                 options=options)
         except:  # noqa
             super().tearDownClass()
